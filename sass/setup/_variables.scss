@@ -1,0 +1,147 @@
+/* =============================================================================
+   Variables
+   ========================================================================== */
+
+
+/* basic font stuff */
+
+$base-font-size:		16px;
+$line-height-ratio:		1.25;
+
+
+/* fontstacks */
+
+$default-FontFamily:		"Open Sans", Arial, Helvetica, sans-serif;
+$alternative-FontFamily:	"Times New Roman", Times, serif;
+$icon-FontFamily:			"project-icons";
+
+
+/* standard sizing used throughout site */
+
+$base-spacing-unit:		$base-font-size*$line-height-ratio;
+$half-spacing-unit:		$base-spacing-unit/2;
+$double-spacing-unit:	$base-spacing-unit*2;
+
+
+/* common shadow */
+
+$standard-shadow: 2px 3px 4px rgba(0,0,0,0.2);
+
+
+/* common radius */
+
+$standard-radius: 3px; // use radius-rem() mixin to set radius in both px and rem
+
+
+/* =============================================================================
+   Colors
+   ========================================================================== */
+
+
+/* shades of grays */
+
+$black: 				#000;
+$gray-darkest: 			#333;
+$gray-darker: 			#666;
+$gray-dark: 			#999;
+$gray-darkish: 			#aaa;
+$gray:					#c0c0c0;
+$gray-lightish:			#ddd;
+$gray-light:			#e0e0e0;
+$gray-lighter: 			#eee;
+$gray-lightest: 		#f3f3f3;
+$white: 				#fff;
+
+
+/* main colors, ui */
+
+$brand-color:			#002776; 					// standard dark blue
+$primary-ui:			#02a6ea; 					// bright blue
+$primary-ui-light:		#d9f5f9;					// baby blue
+$secondary-ui:			#e7ede7;					// very light warm grey, tabs
+$secondary-ui-light:	lighten($secondary-ui, 3%);	// light warm grey, buttonbars
+$secondary-ui-dark:		$gray-lighter;				// light warm grey, buttonbars
+
+
+/* button colors */
+
+$btn-color:						$secondary-ui;
+$btn-color-highlight:			$secondary-ui-light;
+$btn-primary-color:				$primary-ui;
+$btn-primarycolor-highlight:	$primary-ui-light;
+
+
+/* indicators in ui */
+
+$ui-alert:				#c00;			// red, invalid, error and warning
+$ui-info:				#9ace36;		// green, valid, info, small controls
+$ui-attention:			#ff8000;		// orange, general warning
+
+
+/* =============================================================================
+   Other stuff (must find better name...)
+   ========================================================================== */
+
+
+/* z-indexes */
+
+$zindexDropdown: 		1000;
+$zindexPopover: 		1010;
+$zindexTooltip: 		1020;
+$zindexModalBackdrop: 	1030;
+$zindexModal: 			1040;
+
+
+/* mediaquery breakpoints */
+
+/*
+   mobile first, in px which will be converted to em's
+   adjust values based on design requirements!
+   you can name your breakpoints here too but note it will be used in the grid names too
+   $S: 				480px;
+   $M: 				1024px;
+   $L: 				1440px;
+   $XL: 				1920px;
+*/
+
+$breakpoints: (
+	"S":	480px,
+	"M":	1024px,
+	"L":	1440px,
+   "XL": 1920px
+);
+
+/* =============================================================================
+   Grid config
+   ========================================================================== */
+
+
+/* grid config */
+
+$use-grid:				true;
+
+
+/* grid gutter size */
+
+$grid-spacing-unit:		$base-spacing-unit;
+
+
+/* extend cell sizes */
+
+/* keep limited to what you need, generates lots of css */
+// cells up to 1/6th will always be generated
+$grid-eights:		   	false;	// cells up to 1/6th plus 1/8th
+$grid-tenths:           false;	// cells up to 1/6th plus 1/8th plus 1/10th
+$grid-twelfths:			false;	// cells up to 1/6th plus 1/8th plus 1/10th plus 1/12th
+
+
+/* cell offset classes, ".offset-1of5" etc. */
+
+/* generates lots of css, will also create mq specific variants */
+$grid-offsets:			true;
+
+/* media query grid options */
+
+/* 	adds loads of extra classes, so default is false
+	will only render for mq's defined above */
+$grid-responsive:		true;

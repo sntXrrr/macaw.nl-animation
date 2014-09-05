@@ -1,0 +1,144 @@
+/*
+
+	lists
+
+	patterns for being flexible with different list layouts
+
+*/
+
+/**
+ * list abstraction as per: csswizardry.com/2011/09/the-nav-abstraction
+ * When used on an `ol` or `ul`, this class throws the list into horizontal mode
+ * e.g.:
+ *
+   <ul class=list>
+       <li><a href=#>Home</a></li>
+       <li><a href=#>About</a></li>
+       <li><a href=#>Portfolio</a></li>
+       <li><a href=#>Contact</a></li>
+   </ul>
+ *
+ * Demo: jsfiddle.net/inuitcss/Vnph4
+ *
+ */
+.list {
+	list-style: none;
+	margin-left: 0;
+	margin-bottom: 0;
+	@extend .cf;
+
+	> li {
+		display: inline-block;
+	}
+}
+
+
+/**
+ * `.list--stacked` extends `.list` and throws the list into vertical mode, e.g.:
+ *
+   <ul class="list  list--stacked">
+       <li><a href=#>Home</a></li>
+       <li><a href=#>About</a></li>
+       <li><a href=#>Portfolio</a></li>
+       <li><a href=#>Contact</a></li>
+   </ul>
+ *
+ */
+.list--stacked {
+
+	> li {
+		display: block;
+
+		> a {
+			display: block;
+		}
+	}
+}
+
+/**
+ * `.list--celled` is like `.list--stacked` but turns .list__item into table-cells
+ * 	with vertical centered content:
+ *
+   <ul class="list  list--celled">
+       <li><a href=# class="list__item">Home</a></li>
+       <li><a href=# class="list__item">About</a></li>
+       <li><a href=# class="list__item">Portfolio</a></li>
+       <li><a href=# class="list__item">Contact</a></li>
+   </ul>
+ *
+ */
+.list--celled {
+
+	> li {
+		display: table-row;
+
+		> * {
+			display: table-cell;
+			vertical-align: middle;
+		}
+	}
+}
+
+/**
+ * Force a list to occupy 100% of the available width of its parent. Extends
+ * `.list`, e.g.:
+ *
+   <ul class="list  list--fit">
+       <li><a href=#>Home</a></li>
+       <li><a href=#>About</a></li>
+       <li><a href=#>Portfolio</a></li>
+       <li><a href=#>Contact</a></li>
+   </ul>
+ *
+ */
+.list--fit {
+	display: table;
+	width: 100%;
+
+	> li {
+		display: table-cell;
+
+		> a {
+			display: block;
+		}
+	}
+}
+
+
+/**
+ * Makes a list 100% wide and turns it into a table
+ * with content containers acting as cells(!)
+ * `.list`, e.g.:
+ *
+	<ul class="list  list--table">
+		<li>
+			<a href=#>Home</a>
+			<p>description with many a word</p>
+		</li>
+		<li>
+			<a href=#>About</a>
+			<p>description with many a word</p>
+		</li>
+		<li>
+			<a href=#>Portfolio</a>
+			<p>description with many a word</p>
+		</li>
+		<li>
+			<a href=#>Contact</a>
+			<p>description with many a word</p>
+		</li>
+	</ul>
+ *
+ */
+.list--table {
+	display: table;
+	width: 100%;
+
+	> li {
+		display: table-row;
+
+		> * {
+			display: table-cell;
+		}
+	}
+}

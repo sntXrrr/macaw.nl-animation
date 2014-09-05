@@ -1,0 +1,137 @@
+/*
+
+	togglers
+
+	the small tile-like thingies that do interface stuff like showing help
+	or expanding page-layout panels
+
+*/
+
+.toggler {
+	border-radius: 4px;
+	padding: $base-spacing-unit;
+	position: relative;
+	width: $double-spacing-unit;
+	height: $double-spacing-unit;
+	padding-top: $double-spacing-unit - $base-font-size - $base-spacing-unit;
+	color: $white;
+	background-color: $ui-info;
+	display: inline-block;
+	margin: 0 0 $base-spacing-unit $base-spacing-unit;
+	line-height: 1;
+	@include vendor(transition, .2s linear);
+
+	&:hover, &:focus, &:active {
+		color: $white;
+		background-color: $ui-info;
+	}
+
+	/* placement next to panel titles */
+
+	h1 & {
+		margin-top: -1px;
+		bottom: -14px;
+	}
+
+	/* placement next to section titles */
+
+	h2 & {
+		margin-top: -12px;
+		bottom: -15px;
+	}
+}
+
+/* setup for arrows */
+
+.toggler--arrow {
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 6px;
+		left: 8px;
+		padding: 0;
+		width: 0;
+		height: 0;
+		border: 0 solid transparent;
+		border-width: 7px 7px 7px 0;
+		border-right-color: $white;
+		@include vendor(transition,.12s);
+	}
+
+	/* this arrow is just a modification, sortof a state */
+	&.is--right::before {
+		@include vendor(transform, rotate(180deg));
+		top: 5px;
+		left: 10px;
+	}
+}
+
+/* setup for pins */
+
+.toggler--pin {
+	text-decoration: none;
+
+	&::before {
+		font-family: $icon-FontFamily;
+		font-style: normal;
+		font-weight: normal;
+		content: "\e603";
+		position: absolute;
+		top: 1px;
+		left: 7px;
+		line-height: 25px;
+		font-size: 16px;
+
+		@include vendor(transition, .12s);
+		@include vendor(transform-origin, 55% 45% 0);
+	}
+	/* if is pinned, show differently */
+	.grid-layout--float &::before {
+		@include vendor(transform, rotate(90deg));
+	}
+}
+
+/* at certain widths we force the panels to float, so pinning isn't an option */
+
+@include media-query("XL"){
+
+	.grid-layout__aside .toggler--pin::before {
+		@include vendor(transform, rotate(90deg));
+	}
+}
+
+@include media-query("L"){
+
+	.grid-layout__pane .toggler--pin::before {
+		@include vendor(transform, rotate(90deg));
+	}
+}
+
+/* setup for doublers */
+
+.toggler--double {
+	text-decoration: none;
+
+	&::before {
+		font-family: $icon-FontFamily;
+		font-style: normal;
+		font-weight: normal;
+		content: "\e62d";
+		position: absolute;
+		top: 1px;
+		left: 5px;
+		line-height: 25px;
+		font-size: 17px;
+
+		@include vendor(transform-origin, 50% 45% 0);
+
+		.grid-layout__pane &, .grid-layout--double & {
+			@include vendor(transform, rotateY(180deg));
+		}
+
+		.grid-layout__pane.grid-layout--double & {
+			@include vendor(transform, rotateY(0));
+		}
+	}
+}

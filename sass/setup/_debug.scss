@@ -1,0 +1,35 @@
+/*
+
+	debug
+
+	some css styling things to help development, this partial must be excluded from production css
+
+*/
+
+
+/* show active breakpoint */
+
+body::after {
+	content: "no breakpoint";
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	width: auto;
+	height: auto;
+	background: rgba(200,200,50,1);
+	color: $black;
+	padding: 5px 10px;
+}
+
+@each $debug-breakpoint, $debug-px in $breakpoints {
+
+	@include media-query( $debug-breakpoint ){
+		body::after {
+			content: 	"breakpoint "
+						+ $debug-breakpoint
+						+ ", from " + $debug-px
+						+ " ("
+						+ em( $debug-px*($base-font-size/16px) ) + ")";
+		}
+	}
+}

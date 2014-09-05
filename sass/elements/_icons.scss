@@ -1,0 +1,253 @@
+/*
+
+	icons
+
+	for Deloitte DAPRS, icons are only used in tiles, just so you know...
+
+*/
+
+/* the icons! */
+
+
+[class*="icon-"] {
+	font-family: 'deloitte-grc-icons';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+	a[class*="icon-"]  {
+		text-decoration: none;
+		border: 0;
+	}
+
+.icon-check:before {
+	content: "\e600";
+}
+.icon-edit:before {
+	content: "\e602";
+}
+.icon-pushpin:before {
+	content: "\e603";
+}
+.icon-info-sign {
+	text-decoration: none;
+	color: $ui-info;
+	font-size: 20px;
+	@include vendor(transition, .2s linear);
+
+	&:hover, &:focus, &:active {
+		color: $ui-info;
+	}
+
+	&:active::before {
+		@include vendor(transform, translate(1px,1px));
+	}
+
+	&::before {
+		content: "\e604";
+	}
+}
+
+.icon-warning-sign {
+	color: $ui-attention;
+
+	&:hover, &:focus, &:active {
+		color: $ui-alert;
+	}
+
+	&::before {
+		content: "\e605";
+	}
+}
+.icon-calendar:before {
+	content: "\e606";
+}
+.icon-paper-clip:before {
+	content: "\e614";
+}
+.icon-check-empty:before {
+	content: "\e607";
+}
+// chevron only
+.icon-chevron-sign-down:before {
+	content: "\e608";
+}
+// ...on circle bg
+.icon-chevron-sign-up:before {
+	content: "\e609";
+	font-size: 20px;
+	line-height: 25px;
+	@include vendor(transform-origin, 53% 62%);
+}
+.icon-subprocess:before {
+	content: "\e60a";
+}
+.icon-process:before {
+	content: "\e60c";
+}
+.icon-list:before {
+	content: "\e60d";
+}
+.icon-trash:before {
+	content: "\e610";
+}
+.icon-link:before {
+	content: "\e611";
+}
+.icon-columns:before {
+	content: "\e612";
+}
+.icon-filter:before {
+	content: "\e613";
+}
+.icon-spinner:before {
+	content: "\e61d";
+}
+.icon-remove-sign:before {
+	content: "\e615";
+}
+.icon-eye-open:before {
+	content: "\e616";
+}
+.icon-cut:before {
+	content: "\e617";
+}
+.icon-file:before {
+	content: "\e618";
+}
+.icon-lock:before {
+	content: "\e619";
+}
+.icon-list-alt:before {
+	content: "\e61a";
+	font-size: 1.1em;
+}
+.icon-group:before {
+	content: "\e61b";
+}
+.icon-beaker:before {
+	content: "\e61c";
+}
+.icon-copy:before {
+	content: "\e61e";
+}
+.icon-search:before {
+	content: "\e61f";
+}
+.icon-align-justify:before {
+	content: "\e621";
+}
+.icon-briefcase:before {
+	content: "\e60f";
+}
+.icon-pencil:before {
+	content: "\e622";
+}
+.icon-plus:before {
+	content: "\e60b";
+}
+.icon-lightbulb:before {
+	content: "\e60e";
+}
+.icon-file-alt:before {
+	content: "\e623";
+}
+.icon-envelope:before {
+	content: "\e624";
+}
+.icon-comment-alt:before {
+	content: "\e625";
+}
+.icon-trafficlight:before {
+	content: "\e626";
+}
+.icon-shipping:before {
+	content: "\e627";
+}
+.icon-box:before {
+	content: "\e620";
+}
+.icon-cube:before {
+	content: "\e628";
+}
+.icon-file-pdf:before {
+	content: "\e629";
+}
+.icon-file-word:before {
+	content: "\e62a";
+}
+.icon-file-excel:before {
+	content: "\e62b";
+}
+.icon-icon-reports:before {
+	content: "\e601";
+}
+.icon-archive:before {
+	content: "\e62c";
+}
+
+/* arrow icons used to open and close panels */
+.icon-arrowup {
+	position: relative;
+	text-indent: -999em;
+
+	&::before {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 0;
+		border: 0 solid transparent;
+		border-width: 0 7px 7px 7px ;
+		border-bottom-color: $brand-color;
+		top: 45%;
+		left: 35%;
+		top: calc(50% - 3px);
+		left: calc(50% - 7px);
+		@include vendor(transition, .2s);
+	}
+
+	&.is-open::before {
+		@include vendor(transform, rotate(-180deg));
+	}
+
+	&[disabled]::before {
+		border-bottom-color: $gray;
+	}
+}
+
+/* for left panel index */
+.icon-arrowright {
+	position: relative;
+	text-indent: -999em;
+
+	&::before {
+		content: "";
+		position: absolute;
+		width: 0;
+		height: 0;
+		border: 0 solid transparent;
+		border-width: 7px 0 7px 7px ;
+		border-left-color: $brand-color;
+		top: 35%;
+		left: 45%;
+		top: calc(50% - 7px);
+		left: calc(50% - 3px);
+		@include vendor(transition, .2s);
+	}
+
+	&.is-open::before {
+		@include vendor(transform, rotate(90deg));
+	}
+
+	&[disabled]::before {
+		border-left-color: $gray;
+	}
+}

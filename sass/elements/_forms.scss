@@ -1,0 +1,502 @@
+/*
+
+	forms
+
+	you know, forms...
+
+*/
+
+textarea, input, select, output, .select--trigger, .form-checkbox {
+	padding: 5px 10px;
+	min-height: 28px;
+	background-color: $white;
+	color: $brand-color;
+	display: inline-block; // needed for output, go figure...
+	width: 100%;
+	border-radius: 3px;
+	border: 1px solid $gray;
+	background-position: 0 0;
+	background-size: 5px 100%;
+	background-repeat: no-repeat;
+
+	// note: IE9 and older do not recognize :invalid and :valid pseudo classes
+	&[required], &[required].ng-invalid {
+		//border-left-color: $ui-alert;
+		background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIxMDAlIiB5Mj0iMTAwJSI+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjY2MwMDAwIiBzdG9wLW9wYWNpdHk9IjEiLz4KICAgIDxzdG9wIG9mZnNldD0iMCUiIHN0b3AtY29sb3I9IiNjYzAwMDAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+		background-image: -moz-linear-gradient(top, $ui-alert 0%, $ui-alert 0%);
+		background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0%,$ui-alert), color-stop(0%,$ui-alert));
+		background-image: -webkit-linear-gradient(top, $ui-alert 0%,$ui-alert 0%);
+		background-image: -o-linear-gradient(top, $ui-alert 0%,$ui-alert 0%);
+		background-image: -ms-linear-gradient(top, $ui-alert 0%,$ui-alert 0%);
+		background-image: linear-gradient(to bottom, $ui-alert 0%,$ui-alert 0%);
+	}
+
+	&[required].ng-valid, &[required]:valid {
+		//border-left-color: $ui-info;
+		background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2NjMDAwMCIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjAlIiBzdG9wLWNvbG9yPSIjOWFjZTM2IiBzdG9wLW9wYWNpdHk9IjEiLz4KICA8L2xpbmVhckdyYWRpZW50PgogIDxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIxIiBoZWlnaHQ9IjEiIGZpbGw9InVybCgjZ3JhZC11Y2dnLWdlbmVyYXRlZCkiIC8+Cjwvc3ZnPg==);
+		background-image: -moz-linear-gradient(top, $ui-info 0%, $ui-info 0%);
+		background-image: -webkit-gradient(linear, left top, right bottom, color-stop(0%,$ui-info), color-stop(0%,$ui-info));
+		background-image: -webkit-linear-gradient(top, $ui-info 0%,$ui-info 0%);
+		background-image: -o-linear-gradient(top, $ui-info 0%,$ui-info 0%);
+		background-image: -ms-linear-gradient(top, $ui-info 0%,$ui-info 0%);
+		background-image: linear-gradient(to bottom, $ui-info 0%,$ui-info 0%);
+	}
+
+	&.ng-invalid {
+		border-color: $ui-alert;
+		-webkit-box-shadow: 0 0 3px $ui-alert;
+		box-shadow: 0 0 3px $ui-alert;
+	}
+}
+
+textarea {
+	resize: none;
+	display: block;
+	min-height: 6.5em;
+	overflow-y: hidden; // this is dependent on the jquery.autogrow.js jquery plugin
+
+    scrollbar-face-color: $gray;
+
+	&::-webkit-scrollbar-thumb {
+		border: 4px solid $gray;
+		background: $white;
+	}
+
+	&.form--compact {
+		font-size: 12px;
+		padding: 7px 10px 7px 5px;
+	}
+}
+
+/* placeholder styling */
+::-webkit-input-placeholder {	color: $gray; font-style: italic; }
+:-moz-placeholder {				color: $gray; font-style: italic; }
+::-moz-placeholder {			color: $gray; font-style: italic; }
+:-ms-input-placeholder {		color: $gray !important; font-style: italic; }
+
+/* disabled also works on tiles and radio/checkbox things */
+[disabled], [disabled] + label {
+	color: $gray-darkish !important;
+	cursor: default !important;
+
+	/* this conflicts with checkbox container */
+	/* &:hover, &:focus {
+		border-color: transparent !important;
+	}
+ */
+	::before {
+		color: $gray !important;
+	}
+}
+
+	/* a bit different for standard form elements: */
+	input[disabled], select[disabled], textarea[disabled], .form-checkbox[disabled] {
+		color: $gray-darkish !important;
+		background: $gray-lightest;
+		border-color: $gray-lighter;
+
+		/* &::-webkit-input-placeholder { color: $white !important; }
+		&:-moz-placeholder { color: $white !important; }
+		&::-moz-placeholder { color: $white !important; }
+		&:-ms-input-placeholder { color: $white !important; } */
+	}
+
+	/* a bit different for standard form elements: */
+	input[readonly], select[readonly], textarea[readonly], .form-checkbox[readonly] {
+		color: $gray-dark;
+		background-color: $white;
+		border-style: dashed;
+		cursor: default !important;
+	}
+
+/* yeah, the output element to show calculated results */
+output {
+	background-color: $gray-lighter;
+	border-color: $gray;
+	color: $black;
+	cursor: default;
+	padding-top: 6px; // don't know why I need this...
+	display: block;
+	overflow: hidden;
+	min-height: 31px;
+}
+
+	/* variation w. visual separator used under a table showing totals */
+	.form--totaloutput {
+		border: 0;
+		border-top: 1px solid $gray;
+		background: $white;
+		color: $brand-color;
+	}
+
+select {
+	display: block;
+	height: 30px;
+	background-color: $white;
+    -moz-appearance: button;
+    -webkit-appearance: button;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-user-select: none;
+
+    &[multiple] {
+    	height: auto;
+    	max-height: none;
+    }
+
+    scrollbar-face-color: $gray;
+
+	&::-webkit-scrollbar-thumb {
+		border: 4px solid $gray;
+		background: $white;
+	}
+}
+
+option {
+    background: $gray;
+    color: $brand-color;
+}
+
+.form-label, .form-text {
+	display: block;
+	padding: 6px 0 0;
+	margin-bottom: 13px;
+	min-height: 27px;
+	font-size: 13px;
+	line-height: 1.6;
+	font-weight: bold;
+	color: $gray-dark;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+.form-label {text-align: right;}
+/* form-text is abically normal text in place of an input in a form */
+.form-text {
+	padding: 7px 10px 0;
+	text-decoration: none; // for hyperlinks...
+}
+
+/* custom checkboxes and radio's =========================================================== */
+
+/* checkbox wrapper */
+.form-checkbox {
+	padding: 0 $base-spacing-unit 0 $half-spacing-unit;
+	margin-bottom: $base-spacing-unit;
+}
+
+/* one box to check */
+.form-checkbox__item {
+	margin-bottom: 0;
+	margin-right: 10px;
+	cursor: pointer;
+	position: relative;
+
+	span {
+		display: block;
+		font-size: 14px;
+		padding-top: 6px;
+		padding-bottom: 7px;
+	}
+
+	/* when they need to be flush */
+	&.float--left {
+		padding-right: $base-spacing-unit;
+	}
+
+	&.form--compact {
+		span {
+			font-size: 12px;
+			padding-top: 0;
+			color: $black;
+		}
+	}
+}
+
+/* the check or radio icon */
+.form-checkbox__icon {
+	width: 20px;
+	height: 20px;
+	margin: 5px 5px 0 5px;
+	@include vendor(transition, .24s);
+
+	/* radio */
+	[type="radio"] + label & {
+		border-radius: 50%;
+		position: relative;
+		border: 3px solid $primary-ui;
+
+		&::before {
+			content: "";
+			display: block;
+			width: 8px;
+			height: 8px;
+			top: 3px;
+			left: 3px;
+			background: $primary-ui;
+			border-radius: 50%;
+			position: absolute;
+			opacity: 0;
+			@include vendor(transform, translateY(-15px));
+			@include vendor(transition, .24s);
+			@include vendor(transition-timing-function, ease-out );
+		}
+	}
+
+	[type="radio"]:checked + label &::before {
+		opacity: 1;
+		@include vendor(transform, scale(1) translateY(0));
+		@include vendor(transition-timing-function, cubic-bezier(.41,1.5,.58,1) );
+	}
+
+	[type="radio"]:not(:disabled) + label:hover &, [type="radio"]:not(:disabled) + label:focus & {
+		border-color: $brand-color;
+
+		&::before {
+			background-color: $brand-color;
+		}
+	}
+
+	[type="radio"]:disabled + label &, [type="radio"]:disabled + label & {
+		border-color: $gray-darkish;
+		color: $gray-darkish;
+
+		&::before {
+			background-color: $gray-darkish;
+		}
+	}
+
+	/* checkbox */
+	[type="checkbox"] + label & {
+		font-size: 22px;
+		line-height: 20px;
+		overflow: hidden;
+		margin: 5px 4px 0 6px;
+
+		&::before {
+			content: "\e607";
+			font-family: $icon-FontFamily;
+			position: absolute;
+			top: 7px;
+			color: $primary-ui;
+			@include vendor(transition, .24s);
+			@include vendor(animation, checkbox-off .24s ease);
+		}
+	}
+
+	[type="checkbox"]:checked + label &::before {
+		content: "\e600";
+		@include vendor(animation, checkbox-on .24s ease);
+	}
+
+	[type="checkbox"]:not(:disabled) + label:hover &, [type="checkbox"]:not(:disabled) + label:focus & {
+		&::before {
+			color: $brand-color;
+		}
+	}
+
+	[type="checkbox"]:disabled + label &, [type="checkbox"]:disabled + label & {
+		color: $gray-darkish;
+	}
+}
+	/* anims for checkbox */
+	@include keyframe(checkbox-on) {
+		25% { @include vendor(transform, scale(1.2)); }
+	}
+
+	@include keyframe(checkbox-off) {
+		25% { @include vendor(transform, scale(.5)); }
+	}
+
+
+/* a button for activating custom dropdowns ======================================== */
+.select--input[readonly] {
+	color: $primary-ui;
+	border-style: solid; // overrule readonly styling
+	/* background: #fffffc;
+	background: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmYyIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjczJSIgc3RvcC1jb2xvcj0iI2Y1ZjVmNSIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmMmYzZjAiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+	background: -moz-linear-gradient(top, #fffffc 0%, #f2f3f0 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#fffffc), color-stop(100%,#f2f3f0));
+	background: -webkit-linear-gradient(top, #fffffc 0%,#f2f3f0 100%);
+	background: -o-linear-gradient(top, #fffffc 0%,#f2f3f0 100%);
+	background: -ms-linear-gradient(top, #fffffc 0%,#f2f3f0 100%);
+	background: linear-gradient(to bottom, #fffffc 0%,#f2f3f0 100%); */
+}
+
+.select--trigger {
+	height: 30px;
+	border: 0;
+	position: absolute;
+	right: 10px;
+	left: 0;
+	top: 0;
+	background: transparent;
+	padding-left: 10px;
+	color: $brand-color;
+	width: calc(100% - 10px); // seems to help FF overcome a width issue...
+	-webkit-box-shadow: $standard-shadow, 0 -10px 25px rgba(0,0,0,0.06) inset;
+	box-shadow: $standard-shadow, 0 -10px 25px rgba(0,0,0,0.06) inset;
+	@include vendor(transition, .2s);
+
+	&::before {
+		font-family: $icon-FontFamily;
+		content: "\e608";
+		position: absolute;
+		width: 32px;
+		height: 30px;
+		line-height: 32px;
+		color: $primary-ui;
+		font-size: 18px;
+		right: 0;
+		top: 0;
+		@include vendor(transition, .2s);
+	}
+
+	&:not(:disabled):hover, &:not(:disabled):focus { // not selector is not supported prior IE9
+		-webkit-box-shadow: $standard-shadow, 0 -10px 25px rgba(0,0,0,0.12) inset;
+		box-shadow: $standard-shadow, 0 -10px 25px rgba(0,0,0,0.12) inset;
+
+		&::before {
+			color: $brand-color;
+		}
+	}
+
+	&:disabled {
+		&::before {
+			color: $gray;
+		}
+	}
+
+	&.is-active {
+		&::before {
+			@include vendor(transform, rotate(-180deg));
+		}
+	}
+}
+
+/* button for use with calendar control */
+.calendar--trigger {
+	position: absolute;
+	width: 34px;
+	height: 30px;
+	line-height: 26px;
+	right: 10px;
+	background: transparent;
+	color: $primary-ui;
+	top: 0;
+	border-width: 0;
+	overflow: hidden;
+	@include vendor(transition, .2s);
+	// need to click underlying input for calendar, except on IE
+	pointer-events: none;
+
+	&:not(:disabled):hover, &:not(:disabled):focus, :hover + &:not(:disabled), :focus + &:not(:disabled) {
+		color: $brand-color;
+	}
+
+	&.icon-calendar::before {
+		font-size: 20px;
+		line-height: 30px;
+	}
+
+	&:disabled, &:hover:disabled {
+		color: $gray !important;
+		border-left-color: $gray-lighter !important;
+	}
+}
+
+.calendar--holder {
+	position: absolute;
+	top: 35px;
+	left: 0;
+	width: 350px;
+	height: 0;
+}
+
+/* layout wrappers for forms to make single column forms not too wide ============================================= */
+.form-main {
+	max-width: 1100px;
+	margin: auto;
+}
+/* a smaller wrapper */
+/* .form-main-S {
+	max-width: 700px;
+	margin: auto;
+} */
+
+/* extension for forms, giving some whitespace after input elem. for warning and message icons ======================= */
+.form-info {
+
+	.form-label ~ [class*="grid__"]:last-child {
+		position: relative;
+		padding-right: 35px;
+	}
+
+	.select--trigger, .calendar--trigger {
+		right: 35px;
+	}
+
+	.select--trigger {
+		width: calc(100% - 35px);
+	}
+}
+	/* form info markers behind form-info inputs */
+	.form__info {
+		position: absolute;
+		right: 12px;
+		top: 8px;
+		font-size: 18px;
+		@include vendor(transition, color .25s linear);
+
+		&.alert {
+			color: $ui-alert;
+
+			&:hover, &:focus, &:active {
+				color: $ui-alert;
+			}
+		}
+
+		&.icon-info-sign {
+			font-size: 21px;
+			top: 6px;
+		}
+
+		&:active {
+			@include vendor(transform, translate3d(1px,1px,0));
+			@include vendor(transition, transform 0 linear);
+		}
+	}
+
+	/* extension to media pattern used for submit buttons under "form-info" forms */
+	.form-info__media {
+		padding-right: 27px;
+	}
+
+.form-twocolumn {
+	-moz-column-width: 400px;
+	-webkit-column-width: 400px;
+	column-width: 400px;
+}
+
+	.form-twocolumn__span {
+		-moz-column-span: all;
+		-webkit-column-span: all;
+		column-span: all;
+	}
+
+/* to align with basic tiles, height set to 50px  */
+/* .form-tiled {
+	height: 50px;
+	min-height: 50px;
+	font-size: 13px;
+} */
+
+/* to place a input type=file transparently on top of a styled fake input type=text and button */
+/* prerequisit is standard placement in a grid, like most forms */
+.form-fileupload {
+	position: absolute;
+	width: 100%;
+	margin-top: -41px;
+	opacity: 0;
+	/* for IE8... */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+}

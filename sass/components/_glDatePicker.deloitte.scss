@@ -1,0 +1,130 @@
+/*
+
+	styling for the calendar control
+
+	used only for the popup, .gldp-deloitte replaces 
+	the .calendar--holder, defined in _forms.scss
+
+	used with glDatePicker.DPRSv1.js jQuery plugin
+
+*/
+
+.gldp-deloitte {
+
+	position: absolute;
+	//font-family: Arial, Helvetica, sans-serif;
+	padding-bottom: 25px;
+	width: 350px;
+	z-index: 2000;
+
+	/* Core style for every cell */
+	.core {
+		position: relative;
+		float: left;
+		padding: 0;
+		margin: 0;
+		font-size: 14px;
+		text-align: center;
+		cursor: pointer;
+		color: $white;
+		background: #92d400;
+	}
+
+	/* Cell border */
+	.border {
+		border: 0 solid $white;
+	}
+
+	/* Month/Year text and select */
+	.monyear, .monyear select {
+		font-size: 14px !important;
+		font-weight: bold;
+		background: #3c8a2e;
+		color: $white;
+	}
+
+	/* Month/Year text */
+	.monyear span {
+		margin: 0 5px;
+	}
+
+	/* Prev/Next arrows */
+	.prev-arrow, .next-arrow {
+		color: $white;
+		text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.75);
+
+		&:active {
+			color: $black;
+		}
+	}
+
+	.prev-arrow-off, .next-arrow-off {
+		color: #000;
+		opacity: 0.15;
+	}
+
+	/* Days of the week */
+	.dow {
+		color: $white;
+		font-weight: bold;
+		// why was this originaly set to "wait"? really?
+		cursor: default !important;
+		background: #3c8a2e;
+	}
+
+	/* Weekdays */
+	.mon, .tue, .wed, .thu, .fri {
+		font-weight: bold;
+
+		&:hover {
+			background: #aaa;
+		}
+	}
+
+	/* Weekend days */
+	.sat, .sun {
+		background: #c9dd03;
+		font-weight: bold;
+
+		&:hover {
+			background: #aaa;
+		}
+	}
+
+	/* Selectable days that are outside of current month being shown */
+	.outday {
+		background: #3c8a2e;
+		color: $white !important;
+	}
+
+	/* Non-Selectable days */
+	.noday {
+		color: #bbb;
+		font-weight: normal;
+		cursor: default !important;
+		background: #ddd;
+	}
+
+	/* Currently selected day */
+	.selected {
+		color: $white;
+		font-weight: bold;
+		background: $grayish;
+	}
+
+	/* Today */
+	.today {
+		color: $white;
+		font-weight: bold;
+		//background: #000;
+		box-shadow: 0 0 0 4px $white inset;
+	}
+
+	/* Special */
+	.special {
+		color: $white;
+		font-weight: bold;
+		border-radius: 0;
+		background: #666;
+	}
+}

@@ -1,0 +1,220 @@
+/*
+
+	tiles
+
+	bread and butter of the design concept
+	mainly used for iconography but with diverse functionality
+
+	basically, tiles are extended .boxes with fixed sizes and hover effects
+
+*/
+
+/* base tile pattern */
+%tile {
+	@extend %box;
+	color: $brand-color;
+	padding: 7px;
+	border: 3px solid $primary-fill-color;
+	overflow: hidden;
+	position: relative;
+	text-align: left;
+}
+	/* for clickable tiles */
+	a%tile, button%tile, label%tile {
+		@include vendor(transition,.16s);
+		text-decoration: none;
+		cursor: pointer;
+
+		&:hover, &:active, &:focus {
+			border-color: $primary-hover-color;
+		}
+	}
+
+.tile {
+	@extend %tile;
+	width: $base-tile;
+	height: $base-tile;
+	padding: 2px;
+	font-size: 9px;
+	white-space: nowrap;
+	padding-top: $base-tile - 8px - $base-spacing-unit;
+}
+
+.tile-big {
+	@extend %tile;
+	width: $double-tile;
+	height: $double-tile;
+	padding-top: $double-tile - $base-font-size - $base-spacing-unit;
+	padding-top: 76px;
+	line-height: 14px;
+}
+
+.tile-big {
+	font-size: 12px;
+
+	/* compensating for longer descriptions */
+	/* these are aligned to the bottom so multiple lines can be displayed */
+
+	p {
+		position: absolute;
+		width: $double-tile - $base-spacing-unit*1.5;
+		line-height: 14px;
+		bottom: 3px;
+	}
+
+	/* exception for showing the icon switch button on "select other engagement" */
+	/* other exceptions for appendix phase buttons and are covered in _states.scss */
+
+	&.icon-switch::before {
+		font-size: 36px;
+		line-height: 85px;
+	}
+
+	/* signoff and submit phases implementation for buttons */
+
+	/* &.icon-pen.is-signoff2, &.icon-pen.is-signoff3, &.icon-floppy.is-submit2, &.icon-pen.is-nosignoff, &.icon-no, &.icon-confirmed {
+		&::before {
+			font-size: 40px;
+			line-height: 80px;
+		}
+	} */
+	&.icon-appendix[class*="is-signoff"], &.icon-appendix[class*="is-submit"],
+	&.icon-floppy[class*="is-submit"], &.icon-pen[class*="is-submit"], &.icon-pen[class*="is-signoff"],
+	&.icon-confirmed[class*="is-signoff"], &.icon-confirmed[class*="is-submit"],
+	&.icon-undo[class*="is-signoff"], &.icon-undo[class*="is-submit"] {
+		&::before {
+			font-size: 36px;
+			line-height: 64px;
+			font-size: 38px;
+			line-height: 70px;
+		}
+	}
+
+	/* unconfirmed works a bit differently since it doesn't use the icon font */
+	&.icon-unconfirmed {
+		&::before {
+			font-size: 52px;
+			line-height: 72px;
+		}
+	}
+
+	/* disabled states for .tile-big, e.g. on startpage "start review" tile when no appendix is selected */
+
+	&[disabled], &[disabled]:hover, &[disabled]:focus {
+		background-color: $grayLighter;
+		border-color: $grayLighter !important;
+	}
+}
+
+.tile-small {
+	@extend %tile;
+	width: $half-tile;
+	height: $half-tile;
+	padding-top: $half-tile - $base-font-size - $base-spacing-unit;
+}
+
+/* used for graphs, require no text inside */
+.tile-micro {
+	@extend %tile;
+	width: $double-tile/5;
+	height: $double-tile/5;
+	border: 0;
+}
+
+/* fixed height long box with a single line of text, used for index */
+/* bit of a cross-over between tile and box */
+.tile--title {
+	@extend %tile;
+	height: $base-tile;
+	width: 100%;
+	line-height: $base-tile - 2*$base-spacing-unit;
+	font-size: 14px;
+	text-decoration: none;
+	padding: 7px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+/* a wrapper around some tiles to get hover effects to on all of them  */
+.tile-collection {
+	text-decoration: none;
+
+	&:hover, &:active, &:focus {
+		[class*="tile"] {
+			border-color: $primary-hover-color !important;
+			@include vendor(transition,.16s);
+		}
+	}
+}
+
+/* date tiles have special text styling, are used for news and announcements */
+.tile-date {
+	@extend .tile;
+	padding: 0;
+	// month
+	font-size: 14px;
+	font-weight: bold;
+	line-height: 1.3;
+
+	span {
+		display: block;
+		text-align: center;
+
+		&:first-child {
+			// day
+			font-size: 18px;
+			font-weight: normal;
+			line-height: 1;
+			margin-bottom: -2px;
+		}
+
+		&:last-child {
+			// year
+			font-size: 9px;
+			opacity: .85;
+		}
+	}
+}
+
+/* tiles have loads of appearances, we'll namespace them with "t-" */
+/* but they're so handy they can be used w. boxes as well */
+
+/* general appearence as used in main navigational elements */
+.t-main {
+	color: $white;
+	background-color: $gray;
+	border-color: $gray;
+	font-weight: bold;
+
+	/* this is a state, yes, but very specific */
+	&.is-active {
+		border-color: $brand-color;
+		background-color: $brand-color;
+
+		&:hover, &:active, &:focus {
+			border-color: $signal-a-shade2 !important;
+		}
+	}
+}
+
+	a.t-main:hover, a.t-main:active, a.t-main:focus {
+		color: $white;
+		border-color: $brand-color;
+	}
+
+/* different colored findings */
+.t-alt {
+	background-color: $signal-b-shade7;
+	border-color: $signal-b-shade7;
+}
+
+	a.t-alt:hover, a.t-alt:active, a.t-alt:focus, label.t-alt:hover, label.t-alt:active, label.t-alt:focus {
+		border-color: $signal-b-shade6;
+	}
+
+	/* lightgreen with dark green text */
+	.t-alt-2 {
+		@extend .t-alt;
+		color: $signal-b-shade2;
+	}

@@ -1,0 +1,16 @@
+/*
+
+	angular-helpers
+
+	these might be added by angular (ng-hide seems to be, ng-show not...)
+	might not be neccdesary in production
+
+*/
+
+.ng-hide, .ng-cloak {
+	display: none !important;
+}
+
+.ng-show {
+	display: block !important;
+}

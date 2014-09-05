@@ -1,0 +1,95 @@
+/*
+
+	tabs
+
+	tabs are dependant on patterns/_lists.scss
+
+   <ul class="tabs">
+       <li class="tabs__tab"><a href=#>Home</a></li>
+       <li class="tabs__tab is-selected"><a href=#>About</a></li>
+       <li class="tabs__tab"><a href=#>Portfolio</a></li>
+       <li class="tabs__tab"><a href=#>Contact</a></li>
+   </ul>
+
+*/
+
+.tabs {
+	@extend .list;
+
+	a {
+		display: block;
+		padding: 10px 15px;
+		text-decoration: none;
+		font-size: 14px;
+		color: $gray-dark;
+		@include vendor(transition, .2s ease);
+
+		&:hover, &:focus {
+		}
+	}
+}
+	/* a tab */
+	.tabs__tab {
+		position: relative;
+		z-index: 1;
+		background: transparent no-repeat;
+		background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjEwMCUiIHN0b3AtY29sb3I9IiNmZmZmZmYiIHN0b3Atb3BhY2l0eT0iMSIvPgogIDwvbGluZWFyR3JhZGllbnQ+CiAgPHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEiIGhlaWdodD0iMSIgZmlsbD0idXJsKCNncmFkLXVjZ2ctZ2VuZXJhdGVkKSIgLz4KPC9zdmc+);
+		background-image: -moz-linear-gradient(top, $white 0%);
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$white));
+		background-image: -webkit-linear-gradient(top, $white 0%);
+		background-image: -o-linear-gradient(top, $white 0%);
+		background-image: -ms-linear-gradient(top, $white 0%);
+		background-image: linear-gradient(to bottom, $white 0%);
+		background-size: 100%;
+		background-position: 0 37px;
+
+		a::after {
+			content: "";
+			display: block;
+			position: absolute;
+			width: 0;
+			height: 70%;
+			border: 1px solid $gray-lightish;
+			border-bottom-color: $white;
+			border-left-color: $white;
+			top: 15%;
+			left: -2px;
+		}
+
+		.is-selected + & a::after, &:first-child a::after, &.is-selected a::after {
+			display: none;
+		}
+
+		&.is-selected {
+			background-position: 0;
+			@include vendor(animation, tab-in .16s ease-in);
+			//border-radius: 6px 6px 0 0;
+			box-shadow: 2px 0px 2px -2px rgba(0,0,0,0.3), -2px 0px 2px -2px rgba(0,0,0,0.1);
+
+			&::before {
+				content: "";
+				display: block;
+				position: absolute;
+				width: 100%;
+				height: 4px;
+				background: $white;
+				top: -3px;
+				border-radius: 4px 4px 0 0;
+				@include vendor(animation, tab-in-link .25s);
+			}
+
+			a {
+				color: $primary-ui;
+			}
+		}
+	}
+
+	@include keyframe(tab-in) {
+		from { background-position: 0 50px; }
+	}
+
+	@include keyframe(tab-in-link) {
+		from { @include vendor(transform, scaleY(0)); }
+		70% { @include vendor(transform, scaleY(0)); }
+		90% { @include vendor(transform, scaleY(2)); }
+	}

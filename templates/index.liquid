@@ -1,0 +1,61 @@
+{% block title %}
+	Styleguide - project
+{% endblock %}
+{% block styles %}
+<style>
+
+	html, footer {
+		background: #aaa;
+		color: white;
+	}
+
+	body {
+		background: white;
+		color: #333;
+	}
+
+	.wrapper {
+		max-width: 1400px;
+		margin: auto;
+	}
+
+</style>
+{% endblock %}
+{% block content %}
+<div class="wrapper">
+
+
+	<div class="grid">
+		<h2 class="w__1of1">
+			Default body text
+		</h2>
+		<div class="w__1of1 w--M__1of2">
+			<p>code starts here..</p>
+		</div>
+		<div class="w__1of1 w--M__1of2">
+			<h1>This is a H1</h1>
+			<h2>This is a H1</h2>
+			<h3>This is a H1</h3>
+			<h4>This is a H1</h4>
+			<h5>This is a H1</h5>
+			<h6>This is a H1</h6>
+			<p>The first paragraph might get some different treatment</p>
+			<p>This is a regular paragraph</p>
+		</div>
+	</div>
+
+	<div class="grid">
+		<h2 class="w__1of1">
+			Sample 2
+		</h2>
+		<div class="w__1of1 w--M__1of2">
+			<p>code starts here..</p>
+		</div>
+		<div class="w__1of1 w--M__1of2">
+			<p>sample starts here..</p>
+		</div>
+	</div>
+
+
+</div>
+{% endblock %}

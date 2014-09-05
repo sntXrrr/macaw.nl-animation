@@ -1,0 +1,232 @@
+/*
+
+	graphs and charts
+
+	Stuff for the layout and styling of the graphs and charts on the DPRS startpage
+
+*/
+
+
+.graph, .chart {
+	margin-bottom: 20px;
+}
+
+.chart {
+	.dropdownlist--select {
+		right: -20px;
+	}
+}
+
+	.legend {
+		height: 185px;
+
+		a {
+			text-decoration: none;
+			color: $black;
+
+			&:hover, &:focus, &:active {
+				color: $brand-color;
+			}
+		}
+
+		li {
+			margin-bottom: 0;
+			height: 20px;
+			clear: both;
+			text-decoration: none;
+			line-height: 20px;
+		}
+
+		&.legend--graph {
+			margin-top: 15px;
+		height: 170px;
+
+			li {
+				margin-bottom: 10px;
+			}
+		}
+
+		.tile-micro {
+			margin-bottom: 1px;
+			margin-right: 10px;
+		}
+
+		&.legend--chart {
+			.is-submit3, .is-signoff4 {
+				margin-bottom: 4px;
+			}
+		}
+	}
+
+	.chart__visual {
+		display: table;
+		position: relative;
+		width: 173px;
+		height: 173px;
+		overflow: hidden;
+		margin: 0 10px 20px 0;
+
+		li {
+			width: 20px;
+			display: table-cell;
+			vertical-align: bottom;
+			border-right: 1px solid $white;
+			overflow: hidden;
+			background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+			background-image: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 30px);
+			background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0px,rgba(255,255,255,1)), color-stop(1px,rgba(0,0,0,0)), color-stop(30px,rgba(0,0,0,0)));
+			background-image: -webkit-linear-gradient(bottom, rgba(255,255,255,1) 0px,rgba(0,0,0,0) 1px,rgba(0,0,0,0) 30px);
+			background-image: -o-linear-gradient(bottom, rgba(255,255,255,1) 0px,rgba(0,0,0,0) 1px,rgba(0,0,0,0) 30px);
+			background-image: linear-gradient(to top, rgba(255,255,255,1) 0px,rgba(0,0,0,0) 1px,rgba(0,0,0,0) 30px);
+			background-repeat: repeat-y;
+			background-position: bottom;
+			background-size: 100% 17px;
+
+
+			&:nth-child(1) { background-color: scale-color($signal-a-shade1, $lightness: 95%);}
+			&:nth-child(2) { background-color: scale-color($signal-a-shade3, $lightness: 90%);}
+			&:nth-child(3) { background-color: scale-color($signal-a-shade4, $lightness: 92%);}
+			&:nth-child(4) { background-color: scale-color($signal-a-shade5, $lightness: 92%);}
+			&:nth-child(5) { background-color: scale-color($signal-b-shade1, $lightness: 92%);}
+			&:nth-child(6) { background-color: scale-color($signal-b-shade2, $lightness: 92%);}
+			&:nth-child(7) { background-color: scale-color($signal-b-shade3, $lightness: 92%);}
+			&:nth-child(8) { background-color: scale-color($ui-alert, $lightness: 95%); }
+		}
+
+		.tile-micro {
+			position: absolute;
+			bottom: 0;
+			margin: 0;
+			padding: 0;
+			line-height: 16px;
+			width: 12,5%;
+			height: 0;
+			text-align: center;
+			border-top-width: 1px;
+			border-top-style: solid;
+			@include vendor(transform, translateZ(1) );
+			@include vendor(animation, slideChart .7s .4s cubic-bezier(.43,1.5,.7,1));
+			@include vendor(transition, height .7s cubic-bezier(.43,1.5,.7,1));
+			background-image: url(data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/Pgo8c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgdmlld0JveD0iMCAwIDEgMSIgcHJlc2VydmVBc3BlY3RSYXRpbz0ibm9uZSI+CiAgPGxpbmVhckdyYWRpZW50IGlkPSJncmFkLXVjZ2ctZ2VuZXJhdGVkIiBncmFkaWVudFVuaXRzPSJ1c2VyU3BhY2VPblVzZSIgeDE9IjAlIiB5MT0iMCUiIHgyPSIwJSIgeTI9IjEwMCUiPgogICAgPHN0b3Agb2Zmc2V0PSIwJSIgc3RvcC1jb2xvcj0iI2ZmZmZmZiIgc3RvcC1vcGFjaXR5PSIxIi8+CiAgICA8c3RvcCBvZmZzZXQ9IjElIiBzdG9wLWNvbG9yPSIjMDAwMDAwIiBzdG9wLW9wYWNpdHk9IjAiLz4KICAgIDxzdG9wIG9mZnNldD0iMTAwJSIgc3RvcC1jb2xvcj0iIzAwMDAwMCIgc3RvcC1vcGFjaXR5PSIwIi8+CiAgPC9saW5lYXJHcmFkaWVudD4KICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMSIgaGVpZ2h0PSIxIiBmaWxsPSJ1cmwoI2dyYWQtdWNnZy1nZW5lcmF0ZWQpIiAvPgo8L3N2Zz4=);
+			background-image: -moz-linear-gradient(bottom, rgba(255,255,255,1) 0px, rgba(0,0,0,0) 1px, rgba(0,0,0,0) 30px);
+			background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0px,rgba(255,255,255,1)), color-stop(1px,rgba(0,0,0,0)), color-stop(30px,rgba(0,0,0,0)));
+			background-image: -webkit-linear-gradient(bottom, rgba(255,255,255,1) 0px,rgba(0,0,0,0) 1px,rgba(0,0,0,0) 30px);
+			background-image: -o-linear-gradient(bottom, rgba(255,255,255,1) 0px,rgba(0,0,0,0) 1px,rgba(0,0,0,0) 30px);
+			background-image: linear-gradient(to top, rgba(255,255,255,1) 0px,rgba(0,0,0,0) 1px,rgba(0,0,0,0) 30px);
+			background-repeat: repeat-y;
+			background-position: bottom;
+			background-size: 100% 17px;
+		}
+	}
+
+	@include keyframe(slideChart) {
+		from { height: 0; }
+	}
+
+
+.status__list.is-open {
+	left: 10px;
+	right: 0;
+	max-height: 300px;
+}
+
+.graph-label {
+	position: absolute;
+	top: 48px;
+	left: 43px;
+	width: 79px;
+	height: 75px;
+	overflow: hidden;
+	text-align: center;
+	vertical-align: middle;
+	font-size: 11px;
+	line-height: 1.2;
+	pointer-events: none;
+	display: none;
+	@include vendor(animation, showGraphData .2s ease-out);
+
+	em {
+		font-size: 30px;
+		display: block;
+		font-style: normal;
+	}
+}
+
+	@include keyframe(showGraphData) {
+		from {
+			opacity: 0;
+			@include vendor(transform, translateY(10px) );
+		}
+	}
+
+
+/* SVG graph */
+/* IE doesn't do transforms on svg elements but at least does opacity */
+.svg-graphdata {
+	opacity: 1;
+	@include vendor(transform-origin, 82px 82px );
+	@include vendor(transform, translateY(0) );
+	@include vendor(animation, zoomGraph .3s .2s ease-out);
+}
+
+	@include keyframe(zoomGraph) {
+		from {
+			opacity: 0;
+			@include vendor(transform, scale(.5) );
+		}
+	}
+
+	.svg-compliant, .svg-improve, .svg-noncompliant, .svg-undetermined, .svg-noeval {
+		@include vendor(transition, .2s );
+
+		&:hover, &:active {
+		opacity: .8;
+		cursor: pointer;
+		}
+	}
+
+	.svg-compliant-inner {
+		fill: none;
+		stroke: $signal-b-shade1;
+	}
+	.svg-compliant-outer {
+		fill: none;
+		stroke: scale-color($signal-b-shade1, $lightness: 85%);
+	}
+
+	.svg-improve-inner {
+		fill: none;
+		stroke: $warning;
+	}
+	.svg-improve-outer {
+		fill: none;
+		stroke: scale-color($warning, $lightness: 80%);
+	}
+
+	.svg-noncompliant-inner {
+		fill: none;
+		stroke: $ui-alert;
+	}
+	.svg-noncompliant-outer {
+		fill: none;
+		stroke: scale-color($ui-alert, $lightness: 85%);
+	}
+
+	.svg-undetermined-inner {
+		fill: none;
+		stroke: $gray;
+	}
+	.svg-undetermined-outer {
+		fill: none;
+		stroke: scale-color($gray, $lightness: 85%);
+	}
+
+	.svg-noeval-inner {
+		fill: none;
+		stroke: lighten($grayLighter, 6%);
+	}
+
+	.svg-noeval-outer {
+		fill: none;
+		stroke: lighten($grayLighter, 10%);
+	}

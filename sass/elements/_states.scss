@@ -1,0 +1,21 @@
+/*
+
+	states
+
+	these states are mainly, but not exclusively, used on tiles
+
+*/
+
+/* text only: for indicating errors on form labels */
+
+.is-error {
+	color: $ui-alert !important;
+}
+
+.is-muted { /* for de-emphasising text color */
+	color: $gray;
+}
+
+.is-txt-warning {
+	color: $ui-attention;
+}

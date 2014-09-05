@@ -1,0 +1,92 @@
+/*
+
+	toolbar
+
+	toolbar atop white box--container, contains custom buttons and can be opened and closed.
+
+	<div id="toolbar01" class="panel panel--toolbar">
+		<div class="toolbar">
+			<button class="toolbar__btn">Select</button>
+			<button class="toolbar__btn">Filter</button>
+			<button class="toolbar__btn">View</button>
+		</div>
+	</div>
+	<button data-panel="toolbar01" title="show/hide toolbar" class="toolbar__toggle icon-chevron-sign-up is-open"></button>
+
+*/
+
+
+.toolbar {
+	display: block;
+	font-size: 14px;
+	padding: $base-spacing-unit;
+	background-color: $secondary-ui-dark;
+	border-top-left-radius: 4px;
+	border-top-right-radius: 4px;
+
+	> li {
+		margin-right: 1.5*$base-spacing-unit;
+	}
+
+	& [class*="icon-"] {
+		color: $primary-ui;
+
+		&:hover, &:focus, &:active {
+			color: $brand-color;
+		}
+	}
+}
+
+	.toolbar__btn {
+		display: inline-block;
+		background-color: $secondary-ui-dark;
+		color: $primary-ui;
+		text-decoration: none;
+		-webkit-border-radius: 4px;
+		border-radius: 4px;
+		vertical-align: top;
+		height: 25px;
+		line-height: 20px;
+		padding: 3px 1.5*$base-spacing-unit;
+		border: 0;
+		box-shadow: 0 1px 1px rgba(0,0,0,.3), 0 1px 1px rgba(255,255,255,1) inset;
+
+		&:hover, &:focus, &:active {
+			color: $brand-color;
+		}
+
+		&:active, &.is-active {
+			box-shadow: 0 1px 1px rgba(0,0,0,.3) inset, 0 1px 1px rgba(255,255,255,1);
+			background-color: darken($secondary-ui-dark, 3%);
+		}
+	}
+
+	.toolbar__toggle {
+		position: absolute;
+		right: 5px;
+		top: -3px;
+		border: 0;
+		padding: 3px 15px;
+		background: transparent;
+		color: $gray-lighter;
+		transform: rotate(-180deg);
+		transition:  .25s .25s ease-out, top .25s ease-out;
+
+		.panel--secondary-ui + & {
+			color: $gray;
+		}
+
+		&:hover, &:focus {
+			color: $primary-ui;
+		}
+
+		&.is-open {
+			color: $primary-ui;
+			transform: rotate(0deg);
+			top: 8px;
+
+			&:hover, &:focus {
+				color: $brand-color;
+			}
+		}
+	}

@@ -1,0 +1,183 @@
+/*
+
+	grid
+
+	every site needs a good, nestable grid system.
+	this grid is based on Nicole Sullivans OOCSS principles but
+	uses inline-block to line up columns/cells/units.
+
+	Unit size is set by grid__XofY classes and can be breakpoint-specific
+	by using grid--[breakpoint]__XofY.
+
+	The width units can be used only as offsets by using the offset-XofY class
+	or as arbitrary width only modifier by using the width-XofY class.
+
+*/
+
+/* =============================================================================
+   Grid cell creation mixin (needs those vars here or won't work)
+   ========================================================================== */
+
+
+$grid-cell-count:	1;
+$gridsizes:			0;
+$cellname:			"w";
+$offsetname:		"offset";
+
+
+@mixin make-grid($counter,$mycellname: $cellname,$myoffsetname: $offsetname) {
+
+	#{"." + $mycellname + "__" + nth(nth($gridsizes,$counter),1)} {
+		width: nth(nth($gridsizes,$counter),2);
+	}
+
+	@if $grid-offsets {
+		#{"." + $myoffsetname + "-" + nth(nth($gridsizes,$counter),1)} {
+			margin-left: nth(nth($gridsizes,$counter),2);
+		}
+	}
+}
+
+
+@if $use-grid {
+
+
+/* =============================================================================
+   Grid cell setup
+   ========================================================================== */
+
+
+	$gridsizes: (
+		// none, only usefull in table layouts
+		//0:	0%,
+		// whole
+		"1of1":		100%,
+		// halves
+		"1of2":		50%,
+		// thirds
+		"1of3":		33.333%,
+		"2of3":		66.666%,
+		// quarters
+		"1of4":		25%,
+		"3of4":		75%,
+		// fifths
+		"1of5":		20%,
+		"2of5":		40%,
+		"3of5":		60%,
+		"4of5":		80%,
+		// sixth
+		"1of6":		16.666%,
+		"5of6":		83.333%,
+		// eights
+		"1of8":		12.5%,
+		"3of8":		37.5%,
+		"5of8":		62.5%,
+		"7of8":		87.5%,
+		// tenths
+		"1of10":	10%,
+		"3of10":	30%,
+		"7of10":	70%,
+		"9of10":	90%,
+		// twelfths
+		"1of12":	8.333%,
+		"5of12":	41.666%,
+		"7of12":	58.333%,
+		"11of12":	91.666%,
+	);
+
+	$grid-cell-configs: (
+		grid-standard:	12,
+		grid-eights:	16,
+		grid-tenths:	20,
+		grid-twelfths:	24
+	);
+
+	@if $grid-twelfths {
+		$grid-cell-count: nth(nth($grid-cell-configs,4),2);
+	}  @else if $grid-tenths {
+		$grid-cell-count: nth(nth($grid-cell-configs,3),2);
+	}  @else if $grid-eights {
+		$grid-cell-count: nth(nth($grid-cell-configs,2),2);
+	}  @else {
+		$grid-cell-count: nth(nth($grid-cell-configs,1),2);
+	}
+
+
+/* =============================================================================
+   cell rendering
+   ========================================================================== */
+
+
+	@for $i from 1 through $grid-cell-count {
+		@include make-grid($i)
+	}
+
+	@if $grid-responsive {
+
+		@for $i from 1 through length($breakpoints) {
+
+			@include media-query(nth(nth($breakpoints,$i),1)) {
+
+				@for $j from 1 through $grid-cell-count {
+					@include make-grid($j,#{$cellname + "--" + nth(nth($breakpoints,$i),1)},#{$offsetname + "-" + nth(nth($breakpoints,$i),1)})
+				}
+			}
+		}
+	}
+
+
+/* =============================================================================
+   Grid definition
+   ========================================================================== */
+
+
+	.grid {
+		display: block;
+		margin: auto;				/* center the grid */
+		padding: 0;
+		letter-spacing: -0.31em;	/* collapse white-space between units */
+		list-style: none;			/* so we can use this on lists */
+
+		/* for the gutter */
+		padding-left: $grid-spacing-unit;
+
+		/* basic styling for all grid columns/cells/units */
+
+		> [class*= #{'"' + $cellname + '__"'} ] {
+			display: inline-block;
+			letter-spacing: normal;
+			vertical-align: top;
+			list-style: none;
+
+			/* for the gutter */
+			padding-right: $grid-spacing-unit;
+
+			/* for gutters in nested grids */
+			> .grid {
+				padding-left: 0;
+				margin-left: 0;
+				margin-right: -$grid-spacing-unit;
+			}
+		}
+
+		/* No, no. No, no, no, no. No, no, no, no. No, no there's no gutter */
+
+		@at-root .grid--nogutter {
+			padding-left: 0;
+
+			> [class*= #{'"' + $cellname + '__"'} ] {
+				padding-right: 0;
+
+				> .grid {
+					margin-right: 0;
+				}
+			}
+		}
+	}
+
+
+/* =============================================================================
+   End: Grid cell setup
+   ========================================================================== */
+
+}

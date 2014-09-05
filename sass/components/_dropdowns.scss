@@ -1,0 +1,219 @@
+/*
+
+	dropdowns
+
+	a dropdown consists of two wrappers around a .list.list--select
+	typically used together with a sibling with a data-dropdown attribute
+	containing the id of this wrapper to enable opening and closing it.
+	for consistency, all text is wrapped inside a span
+
+ 	<button data-dropdown="mydropdown" class="btn">show dropdown</button>
+	<div id="mydropdown" class="dropdownlist">
+		<div class="dropdown__inner">
+			<ul class="list  list--select">
+				<li>
+					<a href=# class="dropdown__item">
+						<span>Home</span>
+					</a>
+				</li>
+				<li>
+					<a href=# class="dropdown__item">
+						<i class="icon-group"></i>
+						<span>About</span>
+					</a>
+				</li>
+				<li>
+					<a href=# class="dropdown__item">
+						<span>Portfolio</span>
+					</a>
+				</li>
+				<li>
+					<a href=# class="dropdown__item">
+						<span>Contact</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<i class="dropdown__tail"></i>
+	</div>
+
+ */
+
+.dropdown {
+	position: absolute;
+	margin-top: 17px;
+	margin-left: -8px;
+	z-index: 1000000;
+	max-width: 100%;
+	max-width: calc(100% + 4px); // 4px for right shadow
+	// default is hidden
+	display: none;
+
+	.form-info & {
+		margin-right: 25px;
+	}
+
+	.list--select {
+		border: 8px solid $gray-lighter;
+		border-radius: 6px;
+		background: $gray-lighter;
+		max-height: 522px;
+		overflow-y: auto;
+		overflow-x: hidden;
+		margin: 0;
+		box-shadow: 2px 3px 3px -1px rgba(0,0,0,0.3);
+		-webkit-overflow-scrolling: touch;
+		@include vendor(animation, openDropdownlist .16s ease-out);
+
+		/* scrollbars in IE */
+		scrollbar-base-color: $gray-lightest;
+		scrollbar-face-color: darken($gray-lightest, 7%);
+		scrollbar-track-color: $gray-lightest;
+		scrollbar-3dlight-color: darken($gray-lightest, 7%);
+		scrollbar-highlight-color: darken($gray-lightest, 7%);
+		scrollbar-arrow-color: darken($gray-lightest, 7%);
+		scrollbar-darkshadow-color: darken($gray-lightest, 7%);
+		scrollbar-shadow-color: $gray-lightest;
+	}
+
+	&.is-open {
+		display: block;
+	}
+
+	li:not(:last-child) {
+		padding-bottom: 5px;
+	}
+}
+
+	// this class is purely used to calc the horizontal position on first render
+	// it really, really helps for the button [data-dropdown] to be just in front of this baby...
+	.dropdown--js-calcpos {}
+
+	.dropdown--nav-top--wide, .dropdown--nav-top--narrow {
+		margin-left: 0;
+		margin-top: 28px;
+	}
+
+	.dropdown--nav-top--wide {
+		left: 35px;
+		right: 14px;
+		max-height: 500px;
+	}
+
+	.dropdown--nav-top--narrow {
+		/* left: 65px;
+		right: 44px; */
+		right: 8px;
+
+		.dropdown__tail {
+			left: auto;
+			top: -6px;
+			right: 10px;
+		}
+	}
+
+	.dropdown--nav-bottom--narrow {
+		margin-top: -3px;
+		right: -7px;
+
+		.dropdown__tail {
+			left: auto;
+			top: -6px;
+			right: 15px;
+		}
+	}
+
+	// extension specific for dropdowns as custom select elements in forms 
+ 	.dropdown--select {
+		left: 0;
+		right: 10px - 4px;
+		margin-left: 0;
+		margin-top: -2px;
+	}
+
+	// direct child of .dropdown, container is needed for vert slide animation
+	.dropdown__inner {
+		overflow: hidden;
+		padding: 0 4px 5px 0; // need to see the shadow, despite overflow...
+	}
+
+	// the triangle on top
+	// needs to be manipulated from code, so no pseude ::after for this one
+	// heette bijna dropdown__piemol, maar ja dat vertaalt niet zo... :)
+	.dropdown__tail {
+		width: 0;
+		height: 0;
+		border: 0 solid transparent;
+		border-width: 0 10px 10px 10px;
+		border-bottom-color: $gray-lighter;
+		position: absolute;
+		z-index: $zindexDropdown + 10;
+		top: -8px;
+		left: 47%;
+		left: calc(50% - 10px);
+		@include vendor(animation, linkDropdownlist .24s ease-out);
+		@include vendor(transform-origin, center bottom);
+	}
+
+	.dropdown__item {
+		display: block;
+		width: 100%;
+		text-decoration: none;
+
+		[class*="icon"] {
+			float: left;
+			width: 28px;
+			height: 30px;
+			text-align: center;
+			font-size: 19px;
+			line-height: 32px;
+			overflow: hidden; // b/c of overflow in FF and IE
+
+			&::before {
+				color: $primary-ui;
+			}
+		}
+
+		span {
+			display: block;
+			font-size: 14px;
+			height: 30px;
+			line-height: 30px;
+			padding: 0 $base-spacing-unit;
+			white-space: nowrap;
+			overflow: hidden;
+			color: $primary-ui;
+			background: $white;
+			border-radius: 3px;
+			@include vendor(transition, .16s);
+		}
+
+		[class*="icon"] + span {
+			margin-left: 33px;
+		}
+
+		&.is-marked {
+			span {
+				background: $primary-ui;
+				color: $white;
+			}
+		}
+
+		&:hover, &:focus, &:active {
+			span {
+				background: $primary-ui;
+				color: $white;
+			}
+		}
+	}
+
+	// vertical animation of content
+	@include keyframe(openDropdownlist) {
+		from { @include vendor(transform, translateY(-100%)); }
+	}
+
+	// animation of dropdown__tail atop dropdown
+	@include keyframe(linkDropdownlist) {
+		from { @include vendor(transform, scaleY(0)); }
+		50% { @include vendor(transform, scaleY(0)); }
+	}

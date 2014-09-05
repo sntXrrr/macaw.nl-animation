@@ -1,0 +1,53 @@
+{
+    "debug": false,
+    "lintScripts": false,
+    "preprocessorLocations": [
+        "sass"
+    ],
+    "preprocessorScriptOutput": "js",
+    "preprocessorStyleOutput": "css",
+    "projectName": "macaw basic",
+    "projectDescription": "HTML5Boilerplate + moderizr",
+    "publishedId": null,
+    "serverHostname": null,
+    "serverPort": null,
+    "templateDirectory": "templates",
+    "templateDefaultLayout": "layout",
+    "templateDefaultPage": "index",
+    "type": "mixture",
+    "useCompass": false,
+    "simpleModePartnerServer": null,
+    "simpleModeFileTypes": null,
+    "modelSource": null,
+    "domain": null,
+    "followLeader": true,
+    "routes": null,
+    "customRuby": false,
+    "customRubyPath": null,
+    "remoteDebugPort": 0,
+    "optimiseImages": true,
+    "password": null,
+    "ignoreDir": [
+        "ignore"
+    ],
+    "customTodos": null,
+    "autoPrefixer": {
+        "active": true,
+        "browsers": [
+            "last 2 versions",
+            "ie 9"
+        ]
+    },
+    "sass": {
+        "outputStyle": "normal",
+        "sourceMap": false
+    },
+    "sitemap": false,
+    "less": null,
+    "optimiseSVG": true,
+    "convertHtml": {
+        "extension": ".html",
+        "path": "html output",
+        "relativePaths": true
+    }
+}

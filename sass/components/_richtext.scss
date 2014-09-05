@@ -1,0 +1,72 @@
+/*
+
+	rich text
+
+	different styling for elements in rich text blocks.
+	most particulary used for changing the appearance
+	of lists to something more recognizable...
+
+	this styling is "name-spaced" to the .box--clr container
+
+*/
+
+.box--clr {
+
+	/* ul's have a nice big block in front of them, outlined when nested */
+	ul {
+		margin-left: 20px;
+
+		li {
+			list-style: none;
+			margin: 5px 0;
+
+			&::before {
+				content: "";
+				position: absolute;
+				width: 10px;
+				height: 10px;
+				background: $brand-color;
+				margin: 4px 0 0 -18px;
+			}
+
+			li::before {
+				background: transparent;
+				border: 2px solid $brand-color;
+			}
+		}
+	}
+
+	/* ol's have custom numbering so you can see nesting, like "4.2.3" */
+	ol {
+		margin-left: 0;
+		counter-reset: section;
+
+		li {
+			font-weight: bold;
+			list-style: none;
+			margin: 5px 0;
+
+			&::before {
+				counter-increment: section;
+				content: counters(section,".");
+				color: $brand-color;
+				margin-left: .25em;
+				margin-right: .5em;
+			}
+
+			/* custom indentation for deeper levels with longer numbering */
+			li {
+				font-weight: normal;
+				margin-left: 1.25em;
+
+				li {
+				margin-left: 2.25em;
+				}
+			}
+		}
+	}
+}
+
+	.box--clr--subtle {
+		color: $gray;
+	}

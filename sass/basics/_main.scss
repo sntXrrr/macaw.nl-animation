@@ -1,0 +1,118 @@
+/*
+
+	main
+
+	project specific standards
+
+*/
+
+html {
+	font: em($base-font-size,16px)/#{$line-height-ratio} $default-FontFamily;
+	overflow-y: scroll;
+
+	/* remove iOS highlight on touch */
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+h1, .alpha {
+	font-size: em(36px);
+	font-family: $default-FontFamily;
+	font-weight: normal;
+	color: $brand-color;
+	padding-top: em(7px);
+	margin-top: 0;
+}
+
+h2, .beta {
+	font-size: em(24px);
+	font-family: $default-FontFamily;
+	font-weight: normal;
+	color: $brand-color;
+	margin-bottom: em(12px);
+	margin-top: em(13px);
+}
+
+h3, .gamma {
+	font-size: 20px;
+	color: $brand-color;
+	font-weight: normal;
+}
+
+h4, .delta {
+	font-size: 16px;
+	font-weight: normal;
+}
+
+h5, .epsilon {
+	font-size: 13px;
+}
+
+h6, .zeta {
+	font-size: 13px;
+	font-weight: normal;
+}
+
+small {
+	font-size: .83333em;
+
+	h3 & {
+		font-size: .75em;
+	}
+}
+
+h1,h2,h3,hgroup,
+ul,ol,dl,
+blockquote,p,address,
+table,
+fieldset,figure,
+pre,
+textarea, input, select, output {
+	margin-bottom: $base-spacing-unit;
+}
+
+i {
+	font-style: normal;
+}
+
+/* links */
+
+a, .link {
+	color: $brand-color;
+
+	&:hover, &:active, &:focus {
+		color: $primary-ui;
+	}
+
+	h1 &, h2 &, h3 & {
+		text-decoration: none;
+		border-bottom: 1px solid desaturate(lighten($brand-color, 60%), 50%);
+
+		&:hover, &:focus {
+			border-bottom-color: $primary-ui;
+		}
+	}
+}
+
+/**
+ * Remove vertical spacing from nested lists.
+ */
+li {
+	list-style-type: square;
+
+	> ul,
+	> ol {
+		margin-bottom:0;
+	}
+}
+
+/* to get rid of Chrome orange outline on focus */
+*:focus {
+    outline: 0;
+}
+
+hr {
+	border: 3px solid $secondary-ui;
+	width: 65%;
+	border-radius: 5px;
+	margin: 35px auto 45px;
+}

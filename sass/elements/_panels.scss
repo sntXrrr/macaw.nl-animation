@@ -1,0 +1,41 @@
+/*
+
+	panels
+
+	not much here, it's a bit of a boring container.
+	but it deserves it's own setup
+
+*/
+
+.panel {
+	height: auto;
+	border-spacing: 0;
+
+	> * {
+		opacity: 1;
+		//@include vendor(transform, translateZ(0) ); // creates new context and conflicts w dropdownmenus
+		z-index: 1;
+		@include vendor(animation, panel-open-content .2s ease-out);
+	}
+}
+
+	.panel--secondary-ui {
+		background-color: $secondary-ui;
+	}
+
+	.panel--slidein > * {
+		@include vendor(animation, panel-slidein-content .16s ease-in);
+	}
+
+	/* to stop stuff sticking out mid-animation */
+	.panel--intransit {
+		overflow: hidden;
+	}
+
+@include keyframe(panel-open-content) {
+	from { @include vendor(transform, translate3d(0,-100%,0) );}
+}
+
+@include keyframe(panel-slidein-content) {
+	from { opacity: 0; @include vendor(transform, translate3d(5px,0,0) );}
+}

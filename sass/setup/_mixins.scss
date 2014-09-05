@@ -1,0 +1,278 @@
+/*
+
+	mixins
+
+	reusable patterns to write better code more easely
+	source of most mixins: https://github.com/csswizardry/inuit.css/blob/master/generic/_mixins.scss
+
+*/
+
+
+/* convert px size to ems
+		font-size: em(24);
+*/
+@function em($pixels, $context: $base-font-size) {
+	@return #{$pixels/$context}em
+}
+
+
+/* convert px size to rems
+		font-size: rem(24);
+
+	really cool for your padding and margins
+*/
+@function rem($pixels) {
+	@return #{$pixels/$base-font-size}rem
+}
+
+
+/* set font size to rems with px fallback for IE8
+		font-rem(24);
+*/
+@mixin font-rem($pixels) {
+	font-size: $pixels;
+	font-size: rem($pixels);
+}
+
+
+/*
+	create rounded corners in rems with px fallback for IE8
+
+*/
+@mixin radius-rem($pixels: $standard-radius) {
+	border-radius:			$pixels;
+	-webkit-border-radius:	rem($pixels);
+	border-radius:			rem($pixels);
+}
+
+
+/**
+ * Style any number of headings in one fell swoop, e.g.:
+ *
+   .foo{
+       @include headings(1, 3){
+           color:#BADA55;
+       }
+    }
+    }
+ *
+ * With thanks to @lar_zzz, @paranoida, @rowanmanning and ultimately
+ * @thierrylemoulec for refining and improving my initial mixin.
+ */
+@mixin headings($from: 1, $to: 6){
+    %base-heading {
+        @content
+    }
+
+    @if $from >= 1 and $to <= 6{
+        @for $i from $from through $to{
+            h#{$i}{
+                @extend %base-heading;
+            }
+        }
+    }
+}
+
+
+/**
+ * Force overly long spans of text to truncate, e.g.:
+ *
+   `@include truncate(100%);`
+ *
+ * Where `$truncation-boundary` is a united measurement.
+ */
+@mixin truncate($truncation-boundary){
+    max-width:$truncation-boundary;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+
+
+/**
+* Media query mixin.
+*
+* It’s not great practice to define solid breakpoints up-front, preferring to
+* modify your design when it needs it, rather than assuming you’ll want a
+* change at ‘mobile’. However, as inuit.css is required to take a hands off
+* approach to design decisions, this is the closest we can get to baked-in
+* responsiveness. It’s flexible enough to allow you to set your own breakpoints
+* but solid enough to be frameworkified.
+*
+* We define some broad breakpoints in our vars file that are picked up here
+* for use in a simple media query mixin. Our options are:
+*
+* mobile-first:
+*
+* S
+* M
+* L
+* XL
+*
+* in between:
+*
+* S2M	(small to medium)
+* S2L	(small to large)
+* M2L	(medium to large)
+* L2XL	(large to extra-large)
+*
+* desktop-first:
+*
+* Smax
+* Mmax
+* Lmax
+* XLmax
+*
+* Not using a media query will, naturally, serve styles to all devices.
+*
+*	@include media-query(L){
+*		[styles here]
+*	}
+*
+* added: actual breakpoints are converted to em units so it will also work with
+* desktop zoom settings. These calculations are a bit more elabore since the
+* breakpoints reference <html> and not <body> like normal markup.
+*
+* We work out your end points for you:
+*/
+
+
+@mixin media-query($media-query){
+
+	@each $breakpoint-name, $breakpoint-px in $breakpoints {
+
+		@if $breakpoint-name == $media-query {
+
+			@media only screen and (min-width: em($breakpoint-px,16px) ) { @content; }
+
+		}
+
+		/* desktop first */
+		@if $breakpoint-name + "-max" == $media-query {
+
+			@media only screen and (max-width: em($breakpoint-px,16px) ) { @content; }
+
+		}
+	}
+}
+
+
+
+/****************************************
+
+	vendor prefix mixins
+	not needed if you're using compass
+	or some other tooling
+
+****************************************/
+
+
+/*
+	Create vendor-prefixed CSS in one go, e.g.
+
+	@include vendor(border-radius, 4px);
+
+	does all of them, so avoid if possible
+
+*/
+@mixin vendor($property, $value) {
+	-webkit-#{$property}:$value;
+	   -moz-#{$property}:$value;
+	    -ms-#{$property}:$value;
+	     -o-#{$property}:$value;
+	        #{$property}:$value;
+}
+
+
+/*
+	Create standard dropshadow
+	with -webkit- for Android > 4.0
+
+*/
+@mixin dropshadow($value: $standard-dropshadow) {
+	-webkit-box-shadow: $value;
+			box-shadow: $value;
+}
+
+
+/*
+	Create vendor-prefixed transitions
+
+	@include transition(height 2s linear);
+	@include transition-duration( 2s );
+	@include transition-delay( .3s );
+	@include transition-timing-function( ease-in );
+
+*/
+@mixin transition($value) {
+	-webkit-transition: $value;
+	        transition: $value;
+}
+
+@mixin transition-duration($value) {
+	-webkit-transition-duration: $value;
+	        transition-duration: $value;
+}
+
+@mixin transition-delay($value) {
+	-webkit-transition-delay: $value;
+	        transition-delay: $value;
+}
+
+@mixin transition-timing-function($value) {
+	-webkit-transition-timing-function: $value;
+	        transition-timing-function: $value;
+}
+
+
+/*	Create CSS keyframe animations, e.g.:
+
+	.foo {
+		@include animation(shrink 3s);
+	}
+
+	@include keyframe(shrink) {
+		from {
+			font-size:5em;
+		}
+	}
+ *
+ * Courtesy of @integralist: twitter.com/integralist/status/260484115315437569
+ */
+
+@mixin animation($value) {
+	-webkit-animation: $value;
+	        animation: $value;
+}
+
+@mixin keyframe ($animation-name) {
+	@-webkit-keyframes $animation-name {
+		@content;
+	}
+
+	@keyframes $animation-name {
+		@content;
+	}
+}
+
+
+/*
+	Create vendor-prefixed transforms
+	includes support for IE9
+
+	@include transform( scaleX(120%) );
+	@include transform-origin( 0 50% );
+
+*/
+@mixin transform($value) {
+	-webkit-transform: $value;
+		-ms-transform: $value;
+	        transform: $value;
+}
+
+@mixin transform-origin($value) {
+	-webkit-transform-origin: $value;
+		-ms-transform-origin: $value;
+	        transform-origin: $value;
+}

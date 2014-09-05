@@ -1,0 +1,167 @@
+/*
+
+	grid
+
+	every site needs a good, nestable grid system.
+	this grid is based on Nicole Sullivans OOCSS principles but
+	uses inline-block to line up columns/cells/units.
+
+	Unit size is set by grid__XofY classes and can be breakpoint-specific
+	by using grid--[breakpoint]__XofY.
+
+	The width units can be used only as offsets by using the offset-XofY class
+	or as arbitrary width only modifier by using the width-XofY class.
+
+*/
+
+/* main wrapper for grids */
+.grid {
+	margin: auto;
+	padding: 0;
+	letter-spacing: -0.31em;	/* collapse white-space between units */
+	list-style: none;			/* so we can use this on lists */
+
+
+	/* basic styling for all grid columns/cells/units */
+
+	> [class^="grid__"] {
+		display: inline-block;
+		letter-spacing: normal;
+		vertical-align: top;
+		list-style: none;
+	}
+
+}
+
+	.grid--nogutter {
+		padding-left: 0;
+
+		> [class^="grid__"] {
+			padding-right: 0;
+
+			.grid--gutter {
+				margin-right: 0;
+			}
+		}
+	}
+
+
+	/* gutters for page layout grids */
+
+	.grid--gutter {
+		padding-left: $base-spacing-unit;
+
+		> [class^="grid__"] {
+			padding-right: $base-spacing-unit;
+
+			/* make nestig of grids with gutters work */
+			.grid--gutter {
+				padding-left: 0;
+				margin-right: -$base-spacing-unit;
+			}
+		}
+	}
+
+	/* grid rows are used for laying out tiles, use display: table and don't wrap */
+
+	.grid--row {
+		display: table;
+		width: 100%;
+
+		> [class^="grid__"] {
+			display: table-cell;
+		}
+
+		/*  a nested grid--row needs extra help w. spacing
+			since negative margins don't work here
+			this works b/c a grid--row is always one row high
+		*/
+		.grid--gutter &.grid--gutter {
+			margin-right: 0;
+
+			> :last-child {
+				padding-right: 0;
+			}
+		}
+	}
+
+/* setting up widths for the grid units and as modifiers for width and offsets */
+
+@mixin grid-unit-setup($namespace: "", $property: "width") {
+
+	// None, weird case
+	#{$namespace}0			{ #{$property}: 0; }
+
+	// Whole
+	#{$namespace}1of1		{ #{$property}: 100%; }
+
+	// Halves
+	#{$namespace}1of2		{ #{$property}: 50%; }
+
+	// Thirds
+	#{$namespace}1of3		{ #{$property}: 33.333%; }
+	#{$namespace}2of3		{ #{$property}: 66.666%; }
+
+	// Quarters
+	#{$namespace}1of4		{ #{$property}: 25%; }
+	#{$namespace}3of4		{ #{$property}: 75%; }
+
+	// Fifths
+	#{$namespace}1of5		{ #{$property}:20%; }
+	#{$namespace}2of5		{ #{$property}:40%; }
+	#{$namespace}3of5		{ #{$property}:60%; }
+	#{$namespace}4of5		{ #{$property}:80%; }
+
+	// Sixths
+	#{$namespace}1of6		{ #{$property}:16.666%; }
+	#{$namespace}5of6		{ #{$property}:83.333%; }
+
+	// Eighths
+	/* #{$namespace}1of8		{ #{$property}:12.5%; }
+	#{$namespace}3of8		{ #{$property}:37.5%; }
+	#{$namespace}5of8		{ #{$property}:62.5%; }
+	#{$namespace}7of8		{ #{$property}:87.5%; } */
+
+	// Tenths
+	/* #{$namespace}1of10		{ #{$property}:10%; }
+	#{$namespace}3of10		{ #{$property}:30%; }
+	#{$namespace}7of10		{ #{$property}:70%; }
+	#{$namespace}9of10		{ #{$property}:90%; } */
+
+	// Twelfths
+	/* #{$namespace}11of12		{ #{$property}:8.333%; }
+	#{$namespace}5of12		{ #{$property}:41.666% }
+	#{$namespace}7of12		{ #{$property}:58.333%; }
+	#{$namespace}11of12		{ #{$property}:91.666%; } */
+}
+
+@include grid-unit-setup(".grid__");
+@include grid-unit-setup(".width-");
+//@include grid-unit-setup(".offset-","margin-left");
+/* responsive grid-unit-setup (desktop-first) */
+@include media-query("L"){
+	@include grid-unit-setup(".grid__L-");
+	//@include grid-unit-setup(".offset-L-","margin-left");
+}
+@include media-query("M"){
+	@include grid-unit-setup(".grid__M-");
+	//@include grid-unit-setup(".offset-M-","margin-left");
+}
+@include media-query("S"){
+	@include grid-unit-setup(".grid__S-");
+	//@include grid-unit-setup(".offset-S-","margin-left");
+}
+
+
+
+	/* tile spacing for the grid */
+	@mixin grid-tile-setup($namespace: "", $property: "width", $offset: 0) {
+
+		// Tiles (has a dependancy on vars defined in variabled.scss)
+		#{$namespace}small-tile			{ #{$property}: $half-tile + $offset; }
+		#{$namespace}tile				{ #{$property}: $base-tile + $offset; }
+		#{$namespace}large-tile			{ #{$property}: $double-tile + $offset; }
+	}
+
+	//@include grid-tile-setup(".width-");
+	//@include grid-tile-setup(".offset-","margin-left");

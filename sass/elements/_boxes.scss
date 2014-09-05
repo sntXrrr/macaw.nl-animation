@@ -1,0 +1,26 @@
+/*
+
+	boxes
+
+	all things that contain things, tiles are a subset of boxes
+
+*/
+
+/* box is the basic template we use for every box and tile */
+
+/* base box pattern */
+%box {
+	display: block;
+	//margin-bottom: $base-spacing-unit;
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}
+
+/* default white box panel */
+.box {
+	@extend %box;
+	padding: $base-spacing-unit;
+	background-color: $gray-lighter;
+}

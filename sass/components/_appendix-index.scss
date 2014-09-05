@@ -1,0 +1,40 @@
+/*
+
+	appendix index
+
+	The left index of an appendix has some specific styling to enable the ellipsis effect on text headers.
+	These require a fixed width on .tile--title so we determine that here dynamically depending on it's context
+
+*/
+
+
+.appendix-index > li {
+
+	> .gridrow {
+		/* widths for first level headers */
+		> :first-child:nth-last-child(5) ~ .grid__1of1 .tile--title {		width: 190px; }
+		> :first-child:nth-last-child(4) ~ .grid__1of1 .tile--title {		width: 250px; }
+		> :first-child:nth-last-child(3) ~ .grid__1of1 .tile--title {		width: 310px; }
+	}
+
+	li {
+		> .gridrow {
+			/* widths for second level headers */
+			> :first-child:nth-last-child(5) ~ .grid__1of1 .tile--title {	width: 130px; }
+			> :first-child:nth-last-child(4) ~ .grid__1of1 .tile--title {	width: 190px; }
+			> :first-child:nth-last-child(3) ~ .grid__1of1 .tile--title {	width: 250px; }
+
+			/* widths for first level pages */
+			> .grid__1of1:first-child:nth-last-child(1) .tile--title {		width: 310px; }
+			> .grid__1of1:first-child:nth-last-child(2) .tile--title {		width: 250px; }
+			> .grid__1of1:first-child:nth-last-child(3) .tile--title {		width: 190px; }
+		}
+
+		li > .gridrow {
+			/* widths for second level pages */
+			> .grid__1of1:first-child:nth-last-child(1) .tile--title {		width: 250px; }
+			> .grid__1of1:first-child:nth-last-child(2) .tile--title {		width: 190px; }
+			> .grid__1of1:first-child:nth-last-child(3) .tile--title {		width: 130px; }
+		}
+	}
+}

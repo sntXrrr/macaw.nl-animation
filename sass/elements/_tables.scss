@@ -1,0 +1,19 @@
+/*
+
+	tables
+
+*/
+
+
+/* use standard grid layout that just happens to be a table semantically */
+
+.table-grid, .table-grid thead, .table-grid tbody, .table-grid tfoot {
+	width: 100%;
+	display: block;
+}
+
+.table-grid {
+	th {
+		font-weight: normal;
+	}
+}

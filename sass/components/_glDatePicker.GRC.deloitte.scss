@@ -1,0 +1,163 @@
+/*
+
+	styling for the calendar control
+
+	used only for the popup, .gldp-deloitte replaces 
+	the .calendar--holder, defined in _forms.scss
+
+	used with glDatePicker.DPRSv1.js jQuery plugin
+
+*/
+
+.gldp-deloitte {
+	position: absolute;
+	padding-bottom: 25px;
+	width: 350px;
+	z-index: 2000;
+	background: $white;
+	-webkit-border-radius: 1px;
+	border-radius: 1px;
+	box-shadow: 0 0 0 4px $white, 0 0 12px 4px rgba(0,0,0,0.25);
+
+
+	/* Core style for every cell */
+	.core {
+		position: relative;
+		float: left;
+		padding: 0;
+		margin: 0;
+		font-size: 14px;
+		text-align: center;
+		cursor: pointer;
+		color: $brand-color;
+		background: $primary-ui;
+		@include vendor(transition, .25s);
+	}
+
+	/* Cell border */
+	.border {
+		border: 0 solid $gray;
+	}
+
+	/* Month/Year text and select */
+	.monyear span {
+		font-size: 20px;
+	}
+
+	.monyear {
+		color: $brand-color;
+		background: $primary-ui-light;
+	}
+
+	.monyear select {
+		font-size: 14px !important;
+		color: $brand-color;
+		display: none;
+		width: auto;
+		height: auto;
+	}
+
+	.monyear option {
+		background: $white;
+	}
+
+	/* Month/Year text */
+	.monyear span {
+		padding: 0 5px;
+	}
+
+	/* Prev/Next arrows */
+	.prev-arrow, .next-arrow {
+		display: inline-block;
+		font-family: $icon-FontFamily;
+		color: $primary-ui;
+		font-size: 24px;
+		@include vendor(transition, .25s);
+
+		&:hover, &:active {
+			color: $brand-color;
+		}
+	}
+
+	.prev-arrow, .prev-arrow-off {
+		@include vendor(transform, rotate(-90deg) );
+	}
+
+	.next-arrow, .next-arrow-off {
+		@include vendor(transform, rotate(90deg) );
+	}
+
+	.prev-arrow-off, .next-arrow-off {
+		color: $black;
+		opacity: 0.15;
+	}
+
+	/* Days of the week */
+	.dow {
+		color: $brand-color;
+		background: $primary-ui-light;
+		font-weight: bold;
+		cursor: default !important;
+	}
+
+	/* Weekdays */
+	.mon, .tue, .wed, .thu, .fri {
+		font-weight: bold;
+
+		&:hover {
+			color: $white;
+			background: $brand-color;
+		}
+	}
+
+	/* Weekend days */
+	.sat, .sun {
+		background: $gray-lightest;
+		font-weight: bold;
+
+		&:hover {
+			color: $white;
+			background: $gray-dark;
+		}
+	}
+
+	/* Selectable days that are outside of current month being shown */
+	.outday {
+		background: $primary-ui-light;
+	}
+
+	/* Non-Selectable days */
+	.noday {
+		color: #bbb;
+		font-weight: normal;
+		cursor: default !important;
+		background: #ddd;
+	}
+
+	/* Currently selected day */
+	.selected {
+		color: $white;
+		font-weight: bold;
+		background: $brand-color;
+	}
+
+	/* Today */
+	.today {
+		font-weight: bold;
+		box-shadow: 0 0 0 4px $white inset;
+
+		&:hover, &:focus {
+			color: $white;
+			font-weight: bold;
+			background: $brand-color;
+		}
+	}
+
+	/* Special */
+	.special {
+		/* color: $white;
+		font-weight: bold;
+		border-radius: 0;
+		background: #666; */
+	}
+}

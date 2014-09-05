@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 9]><html class="no-js lt-ie9 lt-ie10"> <![endif]-->
+<!--[if IE 9]><html class="no-js lt-ie10"> <![endif]-->
+<!--[if gt IE 9]><!--><html class="no-js"><!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>{% block title %}Empty{% endblock %}</title>
+
+		<!-- Styles -->
+
+			<!-- default project stylesheet -->
+			{{ "project.css" | asset_url | stylesheet_tag }}
+			<!-- Style block allowing child pages to inject their own styles -->
+			{% block styles %}{% endblock %}
+
+		<!-- End: Styles -->
+		<!-- Scripts -->
+		<!-- scripts are added in non-minified, separate files to be concatonated and minified into packages in development/integration environment -->
+
+			<!-- Modernizr http://modernizr.com/ -->
+			<!-- only a minimal version is used as default (html5shiv + printshiv only) -->
+			<!-- replace with lib/modernizr-latest.dev.js if you need to use featuretests during front-end dev -->
+			<!-- use custom build w only neccessary features (or remove completely if no <IE10 support is required) for dev/prod -->
+			{{ "lib/modernizr.custom.74769.js" | asset_url | script_tag }}
+
+			<!-- Angular http://angularjs.org/ -->
+			{{ "lib/angular-1.2.14.js" | asset_url | script_tag }}
+
+			<!-- jQuery http://jquery.com/ -->
+			{{ "lib/jquery-1.11.0.js" | asset_url | script_tag }}
+
+			<!-- project specific stuff like init of plugins -->
+			{{ "project.js" | asset_url | script_tag }}
+
+			<!-- Script block allowing child pages to inject their own scripts -->
+			{% block scripts %}{% endblock %}
+
+		<!-- End: Scripts -->
+	</head>
+	<body>
+		<!-- Include -->
+		{% include "header" %}
+		<!-- Content block, child page inject content -->
+		{% block content %}{% endblock %}
+		<!-- Include -->
+		{% include "footer" %}
+	</body>
+</html>

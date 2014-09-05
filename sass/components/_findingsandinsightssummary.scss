@@ -1,0 +1,135 @@
+/*
+
+	findings and insights summary
+
+	we need some extra stuff here to make it scale nicely on different screensizes
+	and mediaqueries won't cut it
+
+*/
+
+.findings-and-insights {
+
+	/* checkboxes in one column */
+	.grid__1of2 {
+		width: 100%;
+	}
+
+	/* throw checkboxes to the right */
+	.grid__1of3:nth-child(2) {
+		float: right;
+	}
+
+	.grid__1of3:first-child, .grid__1of3:last-child {
+		width: 66%;
+	}
+
+	.grid__1of3:last-child {
+		padding-right: 50px !important;
+
+			> .box--clr:first-child {
+			margin-top: 0;
+		}
+	}
+
+	/* when a sidepanel is floated or folded, we're good */
+	.grid-layout--float ~ .grid-layout__main &, .grid-layout--folded ~ .grid-layout__main & {
+		// is good
+
+		/* checkboxes in two columns */
+		.grid__1of2 {
+			width: 50%;
+		}
+
+		.grid__1of3:nth-child(2) {
+			float: none;
+		}
+
+		.grid__1of3:first-child, .grid__1of3:last-child {
+			width: 33.33%;
+		}
+
+		.grid__1of3:last-child {
+			padding-right: 10px !important;
+		}
+	}
+
+}
+
+@include media-query("XL"){
+
+	.findings-and-insights {
+
+		.grid-layout--float ~ .grid-layout__main &, .grid-layout--folded ~ .grid-layout__main &, & {
+
+			.grid__1of2 {
+				width: 100%;
+			}
+
+			.grid__1of3:nth-child(2) {
+				float: right;
+			}
+
+			.grid__1of3:first-child, .grid__1of3:last-child {
+				width: 66%;
+			}
+
+			.grid__1of3:last-child {
+				padding-right: 50px !important;
+
+					> .box--clr:first-child {
+					margin-top: 0;
+				}
+			}
+		}
+
+		.grid-layout--float ~ .grid-layout--folded ~ .grid-layout__main &,
+		.grid-layout--float ~ .grid-layout--float ~ .grid-layout__main &,
+		.grid-layout--float ~ .grid-layout__aside ~ .grid-layout__main &,
+		.grid-layout--folded ~ .grid-layout--folded ~ .grid-layout__main & {
+			// is goed
+
+			.grid__1of2 {
+				width: 50%;
+			}
+
+			.grid__1of3:nth-child(2) {
+				float: none;
+			}
+
+			.grid__1of3:first-child, .grid__1of3:last-child {
+				width: 33.33%;
+			}
+
+			.grid__1of3:last-child {
+				padding-right: 10px !important;
+			}
+		}
+
+	}
+}
+
+@include media-query("L"){
+
+	.grid.findings-and-insights {
+
+		.grid__1of2 {
+			width: 100% !important;
+		}
+
+		.grid__1of3:nth-child(2) {
+			float: right !important;
+		}
+
+		.grid__1of3:first-child, .grid__1of3:last-child {
+			width: 66% !important;
+		}
+
+		.grid__1of3:last-child {
+			padding-right: 50px !important;
+
+				> .box--clr:first-child {
+				margin-top: 0 !important;
+			}
+		}
+	}
+}
